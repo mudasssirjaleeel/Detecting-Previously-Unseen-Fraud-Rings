@@ -1,0 +1,93 @@
+\subsection{Held-out world}
+
+Table~\ref{tab:main} averages over the seven held-out typologies of the held-out world. Two comparisons matter.
+
+<<MAIN_TABLE>>
+
+\paragraph{\coral{} signals add relational evidence that supervised models lack}
+\coral{}-S and GBDT use the same learner and the same account features; they differ only in the \coral{} graph signals. Adding those signals raises unseen-typology AUPRC from {{GB}} to {{S}}, recall at 1\% FPR from {{GBrec}} to {{Srec}}, and ring recall from {{GBring}} to {{Sring}}. Random forest, the strongest baseline, reaches {{RF}}. Supervised graph features alone (Graph-GBDT, {{GG}}) do \emph{not} improve on GBDT ({{GB}}). This is consistent with \citet{maganti2026liability}: generic graph embeddings fitted to seen labels do not transfer to unseen patterns, whereas closure and flow signals, which are computed without labels, do. \coral{}-S also improves AUPRC on the \emph{seen} typologies ({{Sseen}} vs.\ {{RFseen}} for RF), so the gain on unseen patterns does not come at the cost of known ones.
+
+\paragraph{Label-free detection}
+Without any labels, \coral{}-U reaches {{U}} AUPRC, about {{Ux}} times the base rate and {{UIFx}} times Isolation Forest ({{IF}}). At a 1\% alert budget it catches {{Urec}} of the positives against {{IFrec}}, and it detects {{Uring}} of the unseen rings against {{IFring}}.
+
+\begin{table}[t]
+\centering
+\caption{AUPRC per held-out typology on the held-out world (mean over five seeds). Bold marks the best supervised and the best label-free method in each row; $n^+$ is the number of positive account-windows of the held-out typology in test.}
+\label{tab:pertyp}
+\small\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrccccccc}
+\toprule
+Held-out typology & $n^+$ & Base rate & \coral{}-S & RF & GBDT & Graph-GBDT & \coral{}-U & IForest \\
+\midrule
+<<PERTYP_ROWS>>
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  ybar, bar width=5pt, width=\linewidth, height=6cm,
+  ymin=0, ymax=1.0, ylabel={AUPRC (held-out typology)},
+  symbolic x coords={<<SYMS>>},
+  xtick=data, x tick label style={font=\footnotesize},
+  legend style={at={(0.5,1.02)}, anchor=south, legend columns=4, font=\footnotesize, draw=none},
+  enlarge x limits=0.08, ymajorgrids, grid style={gray!20}]
+\addplot[fill=blue!60!black, draw=none] coordinates {<<COORDS_S>>};
+\addplot[fill=orange!80!black, draw=none] coordinates {<<COORDS_RF>>};
+\addplot[fill=gray!60, draw=none] coordinates {<<COORDS_GB>>};
+\addplot[fill=teal!50, draw=none] coordinates {<<COORDS_U>>};
+\legend{\coral{}-S, RF, GBDT, \coral{}-U (no labels)}
+\end{axis}
+\end{tikzpicture}
+\caption{AUPRC on each held-out typology of the held-out world.}
+\label{fig:pertyp}
+\end{figure}
+
+\paragraph{Per typology}
+Table~\ref{tab:pertyp} and Figure~\ref{fig:pertyp} break the results down. \coral{}-S is the best supervised method on {{nwin_s}} of seven typologies and \coral{}-U the best label-free method on {{nwin_u}}. The exception for \coral{}-S is {{losers}}. On the development world, adding the flow factors had turned cycle from a loss into a win; on the held-out world it did not, so we do not claim that cycles are solved. The largest gains are on scatter-gather and gather-scatter, whose split-and-recombine shape produces dense, conserving groups of mutually new accounts.
+
+\subsection{Ablations}
+
+\begin{table}[t]
+\centering
+\caption{Ablations of the label-free detector \coral{}-U on the held-out world (mean $\pm$ std over five seeds, averaged over seven held-out typologies).}
+\label{tab:ablation}
+\small
+\begin{tabular}{lcccc}
+\toprule
+Variant & AUPRC & ROC-AUC & Rec@1\% & Ring rec@1\% \\
+\midrule
+<<ABLATION_ROWS>>
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:ablation} isolates the components of \coral{}-U.
+
+\paragraph{Rings and flow carry the label-free signal}
+Removing rings altogether cuts AUPRC from {{U}} to {{norings}}, below Isolation Forest. Closure-only rings reach {{noflow}}; adding the flow factors raises this to {{U}}, and ring recall from {{noflow_ring}} to {{U_ring}}. Dropping only amount coherence, the factor most tied to how a simulator generates laundering, leaves {{nocv}}, still more than four times Isolation Forest. Edge-level surprise on its own is a weak signal: in development, ring edges received only modestly lower co-activity probability than other edges, because legitimate newcomers also form unexplained relationships. The signal lies in how surprising edges close on each other and in what the resulting group does with money.
+
+\paragraph{Graph and feature evidence are complementary}
+The graph score alone reaches {{gonly}}, below the full \coral{}-U, and the feature-only Isolation Forest reaches {{IF}}.
+
+\paragraph{What the self-supervised predictor contributes}
+Replacing CPP by a ``have these accounts ever interacted'' heuristic ($p_{ij}=0.9$ with any shared history, $0.1$ otherwise) has opposite effects in the two detectors. In the label-free score the heuristic is \emph{better} ({{heur}} vs.\ {{U}}; ROC-AUC {{heur_roc}} vs.\ {{U_roc}}). As a binary filter, ``never interacted'' keeps every ring edge, whereas the learned predictor assigns some ring edges a probability above $p_{\max}$ and drops them from closure: in development diagnostics, ring edges involving a fresh account received a mean predicted probability of about 0.6. In the supervised detector the learned surprise is the better input: \coral{}-S reaches {{S3}} with CPP against {{Sh}} with the heuristic (three seeds), with ring recall {{S3ring}} vs.\ {{Shring}}. Graded surprise is therefore informative as a \emph{feature} even where a coarse rule is the better \emph{filter} for closure. On the development world the learned predictor was slightly ahead in the label-free setting as well (0.275 vs.\ 0.256); we report the held-out reversal rather than change the method after seeing it.
+
+\paragraph{Encoder}
+With the learned temporal GNN encoder instead of SIGN, \coral{}-S reaches {{GS}}$\pm${{GSsd}} and \coral{}-U {{GU}}$\pm${{GUsd}} (three seeds): slightly below the SIGN encoder, with higher variance across seeds. On this benchmark the parameter-free encoder suffices; whether learned temporal representations pay off on larger ledgers with longer histories is a question for the AMLworld experiments.
+
+\subsection{Drift stress test}
+\label{sec:drift}
+
+<<DRIFT_TABLE>>
+
+\paragraph{The gate detects the regime change}
+The gate's unreliability signal rises from {{r_first}} in the first three drifted test windows to {{r_last}} in the last three, and the graph weight $\alpha_k$ falls from {{a_first}} to {{a_last}} (minimum {{a_min}}). In the five-seed runs without drift it never left its dead zone ($\alpha_k=\alpha_0$ in all {{n_gate_windows}} test windows), so it costs nothing when nothing changes.
+
+\paragraph{It prevents collapse but does not restore performance}
+Graph-only label-free scoring collapses to {{dgonly}} AUPRC under drift. With the gate, \coral{}-U keeps {{dU}} against {{dUng}} without it, catches {{dU_rec}} of positives at a 1\% alert budget against {{dUng_rec}} ungated and {{dIF_rec}} for Isolation Forest, and detects {{dU_ring}} of rings against {{dIF_ring}}. On AUPRC, however, it only matches Isolation Forest ({{dIF}}). The gate also reacts with a lag of about three windows, because the dead zone requires a shift beyond two standard deviations before it acts.
+
+\paragraph{Supervised detectors are vulnerable}
+Under drift \coral{}-S falls from {{S}} to {{dS}}, below RF ({{dRF}}) and GBDT ({{dGB}}): the signals that make it strong on stable data mislead it once legitimate behaviour starts to look like rings. We designed a gated variant after observing this, which falls back from \coral{}-S to GBDT using the same label-free gate. It improved \coral{}-S on the development world (from 0.390 to 0.430) but not on the held-out world ({{dSg}}), so we do not adopt it. Drift-robust supervised use of graph evidence remains an open problem.

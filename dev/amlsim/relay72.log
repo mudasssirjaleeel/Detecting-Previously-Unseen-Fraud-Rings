@@ -1,0 +1,155 @@
+71,152 transactions, 4,180 accounts
+typology
+BIPARTITE         1356
+STACK              923
+SCATTER-GATHER     452
+GATHER-SCATTER     262
+CYCLE              230
+FAN-IN             198
+FAN-OUT            192
+RANDOM             162
+
+=== held-out BIPARTITE  (65.5s, positives=107)
+                         method  auprc  recall@1%fpr  ring_recall@1%fpr
+                     Graph-GBDT  0.796         0.776              1.000
+                CORAL-S (gated)  0.735         0.813              1.000
+                        CORAL-S  0.732         0.813              1.000
+                           GBDT  0.726         0.701              0.900
+                             RF  0.638         0.822              1.000
+              CORAL-U (no gate)  0.208         0.290              0.500
+  CORAL-U (no amount coherence)  0.134         0.290              0.500
+                        CORAL-U  0.127         0.280              0.500
+CORAL-U (no flow: closure only)  0.108         0.290              0.500
+                IsolationForest  0.088         0.084              0.000
+             CORAL-U (no rings)  0.070         0.131              0.000
+           CORAL-U (graph only)  0.044         0.206              0.300
+    CORAL-U (heuristic, no CPP)  0.014         0.000              0.000
+
+=== held-out CYCLE  (63.8s, positives=88)
+                         method  auprc  recall@1%fpr  ring_recall@1%fpr
+                        CORAL-S  0.835         0.898              1.000
+                CORAL-S (gated)  0.827         0.886              1.000
+                     Graph-GBDT  0.700         0.773              1.000
+                           GBDT  0.692         0.739              1.000
+                             RF  0.584         0.807              1.000
+              CORAL-U (no gate)  0.056         0.080              0.000
+                        CORAL-U  0.053         0.080              0.000
+  CORAL-U (no amount coherence)  0.049         0.080              0.000
+CORAL-U (no flow: closure only)  0.049         0.080              0.000
+             CORAL-U (no rings)  0.041         0.125              0.000
+           CORAL-U (graph only)  0.021         0.080              0.000
+                IsolationForest  0.014         0.023              0.000
+    CORAL-U (heuristic, no CPP)  0.006         0.023              0.000
+
+=== held-out FAN-IN  (62.7s, positives=6)
+                         method  auprc  recall@1%fpr  ring_recall@1%fpr
+                             RF  0.354         0.500              1.000
+                     Graph-GBDT  0.339         0.333              0.667
+                           GBDT  0.337         0.333              0.667
+                CORAL-S (gated)  0.228         0.333              0.667
+                        CORAL-S  0.228         0.333              0.667
+             CORAL-U (no rings)  0.002         0.000              0.000
+                IsolationForest  0.001         0.000              0.000
+              CORAL-U (no gate)  0.001         0.000              0.000
+CORAL-U (no flow: closure only)  0.001         0.000              0.000
+                        CORAL-U  0.001         0.000              0.000
+  CORAL-U (no amount coherence)  0.001         0.000              0.000
+           CORAL-U (graph only)  0.001         0.000              0.000
+    CORAL-U (heuristic, no CPP)  0.000         0.000              0.000
+
+=== held-out FAN-OUT  (62.1s, positives=22)
+                         method  auprc  recall@1%fpr  ring_recall@1%fpr
+                        CORAL-S  0.553         0.727              0.833
+                CORAL-S (gated)  0.537         0.682              0.833
+                           GBDT  0.509         0.727              0.833
+                     Graph-GBDT  0.474         0.818              0.833
+                             RF  0.158         0.727              0.833
+             CORAL-U (no rings)  0.006         0.000              0.000
+                IsolationForest  0.004         0.000              0.000
+              CORAL-U (no gate)  0.002         0.000              0.000
+                        CORAL-U  0.002         0.000              0.000
+  CORAL-U (no amount coherence)  0.002         0.000              0.000
+CORAL-U (no flow: closure only)  0.002         0.000              0.000
+    CORAL-U (heuristic, no CPP)  0.001         0.000              0.000
+           CORAL-U (graph only)  0.001         0.000              0.000
+
+=== held-out GATHER-SCATTER  (61.5s, positives=87)
+                         method  auprc  recall@1%fpr  ring_recall@1%fpr
+                        CORAL-S  0.882         0.897              1.000
+                CORAL-S (gated)  0.881         0.885              1.000
+                     Graph-GBDT  0.755         0.862              1.000
+                           GBDT  0.743         0.885              1.000
+                             RF  0.649         0.897              1.000
+              CORAL-U (no gate)  0.103         0.230              0.250
+                        CORAL-U  0.051         0.172              0.125
+           CORAL-U (graph only)  0.051         0.276              0.250
+  CORAL-U (no amount coherence)  0.051         0.184              0.125
+CORAL-U (no flow: closure only)  0.046         0.184              0.125
+             CORAL-U (no rings)  0.034         0.069              0.000
+                IsolationForest  0.015         0.023              0.000
+    CORAL-U (heuristic, no CPP)  0.009         0.023              0.000
+
+=== held-out RANDOM  (65.2s, positives=49)
+                         method  auprc  recall@1%fpr  ring_recall@1%fpr
+                           GBDT  0.442         0.510              0.429
+                        CORAL-S  0.385         0.469              0.571
+                CORAL-S (gated)  0.380         0.469              0.571
+                     Graph-GBDT  0.352         0.571              0.714
+                             RF  0.163         0.714              1.000
+             CORAL-U (no rings)  0.066         0.327              0.143
+    CORAL-U (heuristic, no CPP)  0.062         0.306              0.143
+                IsolationForest  0.037         0.184              0.143
+              CORAL-U (no gate)  0.015         0.082              0.000
+  CORAL-U (no amount coherence)  0.013         0.082              0.000
+                        CORAL-U  0.012         0.082              0.000
+CORAL-U (no flow: closure only)  0.011         0.061              0.000
+           CORAL-U (graph only)  0.006         0.000              0.000
+
+=== held-out SCATTER-GATHER  (65.4s, positives=96)
+                         method  auprc  recall@1%fpr  ring_recall@1%fpr
+                        CORAL-S  0.913         0.938              1.000
+                CORAL-S (gated)  0.910         0.938              1.000
+                     Graph-GBDT  0.861         0.917              1.000
+                           GBDT  0.840         0.917              1.000
+                             RF  0.727         0.938              1.000
+              CORAL-U (no gate)  0.117         0.135              0.143
+                        CORAL-U  0.111         0.125              0.143
+CORAL-U (no flow: closure only)  0.105         0.104              0.143
+  CORAL-U (no amount coherence)  0.103         0.104              0.143
+             CORAL-U (no rings)  0.090         0.219              0.143
+                IsolationForest  0.036         0.073              0.000
+           CORAL-U (graph only)  0.031         0.104              0.143
+    CORAL-U (heuristic, no CPP)  0.028         0.094              0.000
+
+=== held-out STACK  (65.4s, positives=86)
+                         method  auprc  recall@1%fpr  ring_recall@1%fpr
+                     Graph-GBDT  0.775         0.744              1.000
+                        CORAL-S  0.746         0.791              1.000
+                CORAL-S (gated)  0.740         0.791              1.000
+                           GBDT  0.713         0.721              1.000
+                             RF  0.679         0.756              1.000
+                IsolationForest  0.059         0.047              0.000
+              CORAL-U (no gate)  0.035         0.058              0.000
+                        CORAL-U  0.019         0.058              0.000
+CORAL-U (no flow: closure only)  0.019         0.058              0.000
+  CORAL-U (no amount coherence)  0.019         0.058              0.000
+           CORAL-U (graph only)  0.009         0.047              0.000
+             CORAL-U (no rings)  0.006         0.000              0.000
+    CORAL-U (heuristic, no CPP)  0.005         0.012              0.000
+
+==== mean over held-out typologies (and seeds) ====
+                                 label_free  auprc  roc_auc  recall@1%fpr  ring_recall@1%fpr  seen_auprc
+method                                                                                                  
+CORAL-S                               False  0.659    0.980         0.733              0.884       0.922
+CORAL-S (gated)                       False  0.655    0.981         0.725              0.884       0.922
+Graph-GBDT                            False  0.632    0.986         0.724              0.902       0.912
+GBDT                                  False  0.625    0.972         0.692              0.854       0.891
+RF                                    False  0.494    0.977         0.770              0.979       0.884
+CORAL-U (no gate)                      True  0.067    0.719         0.109              0.112       0.160
+CORAL-U                                True  0.047    0.713         0.100              0.096       0.134
+CORAL-U (no amount coherence)          True  0.046    0.713         0.100              0.096       0.134
+CORAL-U (no flow: closure only)        True  0.043    0.712         0.097              0.096       0.124
+CORAL-U (no rings)                     True  0.039    0.787         0.109              0.036       0.142
+IsolationForest                        True  0.032    0.834         0.054              0.018       0.149
+CORAL-U (graph only)                   True  0.020    0.510         0.089              0.087       0.080
+CORAL-U (heuristic, no CPP)            True  0.016    0.547         0.057              0.018       0.059

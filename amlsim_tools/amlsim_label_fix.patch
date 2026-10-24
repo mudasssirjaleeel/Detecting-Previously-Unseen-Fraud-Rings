@@ -1,0 +1,35 @@
+diff --git a/src/main/java/amlsim/model/aml/BipartiteTypology.java b/src/main/java/amlsim/model/aml/BipartiteTypology.java
+index 5a10652..0cdc5bf 100755
+--- a/src/main/java/amlsim/model/aml/BipartiteTypology.java
++++ b/src/main/java/amlsim/model/aml/BipartiteTypology.java
+@@ -48,7 +48,7 @@ public class BipartiteTypology extends AMLTypology {
+ 
+             for (int j = last_orig_index; j < members.size(); j++) {
+                 Account bene = members.get(j); // The latter half accounts are beneficiaries
+-                makeTransaction(step, transactionAmount.doubleValue(), orig, bene);
++                makeTransaction(step, transactionAmount.doubleValue(), orig, bene, alert.isSAR(), alert.getAlertID());  // label fix
+             }
+         }
+     }
+diff --git a/src/main/java/amlsim/model/aml/StackTypology.java b/src/main/java/amlsim/model/aml/StackTypology.java
+index d76303e..b0bf91d 100755
+--- a/src/main/java/amlsim/model/aml/StackTypology.java
++++ b/src/main/java/amlsim/model/aml/StackTypology.java
+@@ -60,7 +60,7 @@ public class StackTypology extends AMLTypology {
+ 
+             for (int j = orig_members; j < (orig_members + mid_members); j++) {
+                 Account bene = alert.getMembers().get(j);
+-                makeTransaction(step, transactionAmount.doubleValue(), orig, bene);
++                makeTransaction(step, transactionAmount.doubleValue(), orig, bene, alert.isSAR(), alert.getAlertID());  // label fix
+             }
+         }
+ 
+@@ -75,7 +75,7 @@ public class StackTypology extends AMLTypology {
+ 
+             for (int j = (orig_members + mid_members); j < total_members; j++) {
+                 Account bene = alert.getMembers().get(j);
+-                makeTransaction(step, transactionAmount.doubleValue(), orig, bene);
++                makeTransaction(step, transactionAmount.doubleValue(), orig, bene, alert.isSAR(), alert.getAlertID());  // label fix
+             }
+         }
+     }

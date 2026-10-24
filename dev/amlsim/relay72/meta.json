@@ -1,0 +1,56 @@
+{
+  "config": {
+    "encoder": "sign",
+    "neg_ratio": 1.0,
+    "max_pair_rows": 400000,
+    "eps": 0.001,
+    "ring_pmax": 0.5,
+    "ring_min_size": 3,
+    "alpha0": 0.9,
+    "use_flow": true,
+    "use_amount_cv": true,
+    "gate_lambda": 0.5,
+    "gate_r0": 2.0,
+    "use_gate": true,
+    "use_rings": true,
+    "seed": 0
+  },
+  "window": 604800,
+  "lookback": 4,
+  "sync_tau": 86400,
+  "hub_cap": 50,
+  "relay_tau": 259200,
+  "train_windows": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "val_windows": [
+    17,
+    18,
+    19,
+    20
+  ],
+  "test_windows": [
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28
+  ]
+}

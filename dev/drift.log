@@ -1,0 +1,122 @@
+52,366 transactions, 1,810 accounts
+typology
+SCATTER-GATHER    150
+STACK             123
+GATHER-SCATTER    102
+CYCLE              78
+FAN-IN             75
+FAN-OUT            68
+BIPARTITE          45
+
+=== held-out BIPARTITE  (15.1s, positives=15)
+                         method  auprc  recall@1%fpr  ring_recall@1%fpr
+                             RF  0.350         0.467              0.333
+                           GBDT  0.241         0.533              0.333
+                     Graph-GBDT  0.190         0.400              0.333
+           CORAL-U (graph only)  0.009         0.000              0.000
+CORAL-U (no flow: closure only)  0.008         0.067              0.000
+  CORAL-U (no amount coherence)  0.008         0.067              0.000
+                        CORAL-U  0.008         0.067              0.000
+              CORAL-U (no gate)  0.008         0.000              0.000
+                IsolationForest  0.006         0.000              0.000
+    CORAL-U (heuristic, no CPP)  0.006         0.000              0.000
+             CORAL-U (no rings)  0.005         0.000              0.000
+
+=== held-out CYCLE  (15.9s, positives=22)
+                         method  auprc  recall@1%fpr  ring_recall@1%fpr
+                             RF  0.333         0.318              0.500
+                     Graph-GBDT  0.186         0.273              0.250
+                           GBDT  0.185         0.318              0.250
+                IsolationForest  0.034         0.136              0.250
+           CORAL-U (graph only)  0.030         0.227              0.250
+              CORAL-U (no gate)  0.029         0.227              0.250
+                        CORAL-U  0.022         0.091              0.000
+             CORAL-U (no rings)  0.021         0.136              0.250
+  CORAL-U (no amount coherence)  0.019         0.091              0.000
+CORAL-U (no flow: closure only)  0.017         0.091              0.000
+    CORAL-U (heuristic, no CPP)  0.017         0.136              0.250
+
+=== held-out FAN-IN  (16.0s, positives=18)
+                         method  auprc  recall@1%fpr  ring_recall@1%fpr
+                             RF  0.393         0.389              0.333
+                     Graph-GBDT  0.279         0.389              0.333
+                           GBDT  0.277         0.389              0.333
+    CORAL-U (heuristic, no CPP)  0.008         0.111              0.000
+                IsolationForest  0.005         0.000              0.000
+             CORAL-U (no rings)  0.004         0.000              0.000
+                        CORAL-U  0.003         0.000              0.000
+  CORAL-U (no amount coherence)  0.003         0.000              0.000
+CORAL-U (no flow: closure only)  0.003         0.000              0.000
+              CORAL-U (no gate)  0.003         0.000              0.000
+           CORAL-U (graph only)  0.003         0.000              0.000
+
+=== held-out FAN-OUT  (16.0s, positives=22)
+                         method  auprc  recall@1%fpr  ring_recall@1%fpr
+                             RF  0.655         0.727              1.000
+                           GBDT  0.504         0.727              1.000
+                     Graph-GBDT  0.493         0.682              0.750
+                IsolationForest  0.018         0.045              0.000
+    CORAL-U (heuristic, no CPP)  0.014         0.000              0.000
+             CORAL-U (no rings)  0.010         0.000              0.000
+                        CORAL-U  0.007         0.000              0.000
+  CORAL-U (no amount coherence)  0.007         0.000              0.000
+CORAL-U (no flow: closure only)  0.007         0.000              0.000
+              CORAL-U (no gate)  0.004         0.000              0.000
+           CORAL-U (graph only)  0.003         0.000              0.000
+
+=== held-out GATHER-SCATTER  (15.6s, positives=43)
+                         method  auprc  recall@1%fpr  ring_recall@1%fpr
+                             RF  0.551         0.581              1.000
+                           GBDT  0.508         0.581              1.000
+                     Graph-GBDT  0.505         0.581              1.000
+                IsolationForest  0.083         0.093              0.000
+             CORAL-U (no rings)  0.068         0.116              0.000
+    CORAL-U (heuristic, no CPP)  0.061         0.116              0.000
+                        CORAL-U  0.037         0.070              0.000
+           CORAL-U (graph only)  0.032         0.000              0.000
+  CORAL-U (no amount coherence)  0.030         0.070              0.000
+CORAL-U (no flow: closure only)  0.030         0.070              0.000
+              CORAL-U (no gate)  0.030         0.000              0.000
+
+=== held-out SCATTER-GATHER  (15.4s, positives=27)
+                         method  auprc  recall@1%fpr  ring_recall@1%fpr
+                             RF  0.696         0.778              1.000
+                     Graph-GBDT  0.644         0.778              1.000
+                           GBDT  0.634         0.741              1.000
+    CORAL-U (heuristic, no CPP)  0.084         0.222              0.250
+                IsolationForest  0.058         0.222              0.250
+             CORAL-U (no rings)  0.014         0.000              0.000
+                        CORAL-U  0.013         0.037              0.000
+  CORAL-U (no amount coherence)  0.013         0.037              0.000
+CORAL-U (no flow: closure only)  0.013         0.037              0.000
+           CORAL-U (graph only)  0.008         0.000              0.000
+              CORAL-U (no gate)  0.008         0.000              0.000
+
+=== held-out STACK  (14.9s, positives=31)
+                         method  auprc  recall@1%fpr  ring_recall@1%fpr
+                             RF  0.556         0.581              0.800
+                     Graph-GBDT  0.487         0.613              0.800
+                           GBDT  0.479         0.548              0.800
+           CORAL-U (graph only)  0.040         0.323              0.400
+    CORAL-U (heuristic, no CPP)  0.030         0.065              0.000
+              CORAL-U (no gate)  0.030         0.226              0.400
+                        CORAL-U  0.023         0.097              0.000
+                IsolationForest  0.023         0.129              0.000
+  CORAL-U (no amount coherence)  0.023         0.065              0.000
+CORAL-U (no flow: closure only)  0.022         0.065              0.000
+             CORAL-U (no rings)  0.015         0.097              0.000
+
+==== mean over held-out typologies (and seeds) ====
+                                 label_free  auprc  roc_auc  recall@1%fpr  ring_recall@1%fpr  seen_auprc
+method                                                                                                  
+RF                                    False  0.505    0.907         0.549              0.710       0.610
+GBDT                                  False  0.404    0.915         0.548              0.674       0.575
+Graph-GBDT                            False  0.398    0.896         0.531              0.638       0.573
+IsolationForest                        True  0.032    0.828         0.089              0.071       0.120
+CORAL-U (heuristic, no CPP)            True  0.031    0.902         0.093              0.071       0.117
+CORAL-U (no rings)                     True  0.020    0.825         0.050              0.036       0.070
+CORAL-U (graph only)                   True  0.018    0.750         0.079              0.093       0.050
+CORAL-U                                True  0.016    0.852         0.052              0.000       0.070
+CORAL-U (no gate)                      True  0.016    0.823         0.065              0.093       0.056
+CORAL-U (no amount coherence)          True  0.015    0.849         0.047              0.000       0.066
+CORAL-U (no flow: closure only)        True  0.014    0.849         0.047              0.000       0.065
